@@ -3,7 +3,7 @@ import axios from "axios";
 import "../styles/adminCategories.css";
 import AdminHeader from "../Componet/AdminHeader";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode"
 
 
 export default function AdminCategories() {
