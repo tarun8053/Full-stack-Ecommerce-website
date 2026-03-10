@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import "../styles/Login.css";
+import "../styles/login.css";
 import axios from 'axios';
 import Header from "../Componet/Header";
 

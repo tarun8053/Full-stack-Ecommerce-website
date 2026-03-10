@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import "../styles/Product.css";
+import "../styles/product.css";
 import Header from "../Componet/Header";
 import Footer from "../Componet/Footer";
 import {addToCartToLoacalStroage} from '../utils/CartUtils'

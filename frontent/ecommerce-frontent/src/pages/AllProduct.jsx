@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import Header from '../Componet/Header';
 import Footer from '../Componet/Footer';
 import {addToCartToLoacalStroage} from '../utils/CartUtils'
-import "../styles/Product.css";
+import "../styles/product.css";
 
 export default function AllProduct() {
 
