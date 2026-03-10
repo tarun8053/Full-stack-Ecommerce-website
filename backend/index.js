@@ -10,7 +10,8 @@ const orderRoutes = require('./routes/orderRoutes');
 app.use(express.json());
 app.use(cors(
     {
-        origin:['http://localhost:5173', 'https://shop2hub.onrender.com/']
+        origin:['http://localhost:5173', 'https://shop2hub.onrender.com/'],
+        credentials : true
     }
 ))
 mongoose
