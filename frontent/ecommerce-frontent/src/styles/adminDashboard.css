@@ -1,0 +1,77 @@
+
+
+.admin-container{
+    padding:40px;
+    background:#f4f6f9;
+    min-height:100vh;
+}
+
+.admin-title{
+    font-size:28px;
+    font-weight:600;
+    margin-bottom:25px;
+}
+
+.order-table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.order-table thead{
+    background:#1e293b;
+    color:white;
+}
+
+.order-table th,
+.order-table td{
+    padding:14px;
+    text-align:left;
+    border-bottom:1px solid #eee;
+}
+
+.order-table tbody tr:hover{
+    background:#f9fafb;
+}
+
+.status{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:500;
+}
+
+.status.pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.status.delivered{
+    background:#d4edda;
+    color:#155724;
+}
+
+.status.cancelled{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+select{
+    padding:6px 10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+.pagination{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+}
+
+.pagination button{
+padding:8px 16px;
+cursor:pointer;
+}

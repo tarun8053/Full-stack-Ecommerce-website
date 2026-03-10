@@ -1,0 +1,165 @@
+/* ===============================
+   Category Section (Premium look)
+================================ */
+
+.categories{
+  padding:90px 60px;
+  background:linear-gradient(180deg,#eef2ff,#f8fafc,#ffffff);
+  min-height:60vh;
+}
+
+/* ===============================
+   Section Header
+================================ */
+
+.section-header{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.section-header h2{
+  font-size:34px;
+  font-weight:700;
+  color:#0f172a;
+  letter-spacing:0.3px;
+}
+
+.section-header p{
+  color:#64748b;
+  font-size:15px;
+  margin-top:6px;
+}
+
+/* ===============================
+   Grid (3 per row)
+================================ */
+
+.categories-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:32px;
+  max-width:1100px;
+  margin:auto;
+}
+
+/* ===============================
+   Category Card
+================================ */
+
+.category-card{
+  position:relative;
+  height:190px;
+  border-radius:16px;
+  overflow:hidden;
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:linear-gradient(135deg,#6366f1,#4f46e5);
+
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  transition:all .35s ease;
+}
+
+/* glow border effect */
+
+.category-card::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:16px;
+  background:linear-gradient(120deg,#6366f1,#8b5cf6,#6366f1);
+  opacity:0;
+  z-index:-1;
+  transition:opacity .35s;
+}
+
+.category-card:hover::after{
+  opacity:1;
+}
+
+/* hover lift */
+
+.category-card:hover{
+  transform:translateY(-10px) scale(1.04);
+  box-shadow:0 25px 50px rgba(0,0,0,0.18);
+}
+
+/* soft glass highlight */
+
+.category-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at top right,
+  rgba(255,255,255,0.25),
+  transparent 60%);
+}
+
+/* ===============================
+   Card Content
+================================ */
+
+.category-overlay{
+  position:relative;
+  text-align:center;
+  padding:22px;
+  color:white;
+}
+
+.category-overlay h3{
+  font-size:22px;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.category-overlay p{
+  font-size:13px;
+  opacity:0.9;
+  margin-bottom:14px;
+}
+
+/* ===============================
+   Status Badge
+================================ */
+
+.status{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+
+.status.active{
+  background:#16a34a;
+  box-shadow:0 4px 12px rgba(22,163,74,.45);
+}
+
+.status.inactive{
+  background:#ef4444;
+  box-shadow:0 4px 12px rgba(239,68,68,.45);
+}
+
+/* ===============================
+   Responsive
+================================ */
+
+@media (max-width:900px){
+
+  .categories-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media (max-width:600px){
+
+  .categories-grid{
+    grid-template-columns:1fr;
+  }
+
+}

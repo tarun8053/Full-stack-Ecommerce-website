@@ -1,0 +1,153 @@
+/* ===============================
+   Page Layout
+================================ */
+
+.admin-product-page{
+    padding:40px;
+    background:#f8fafc;
+    min-height:100vh;
+}
+
+/* ===============================
+   Heading
+================================ */
+
+.admin-product-page h1{
+    font-size:28px;
+    margin-bottom:25px;
+    color:#1e293b;
+}
+
+.admin-product-page h2{
+    margin-top:40px;
+    margin-bottom:15px;
+    color:#1e293b;
+}
+
+
+/* ===============================
+   Product Form
+================================ */
+
+.product-form{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.06);
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.product-form textarea{
+    grid-column:span 2;
+    min-height:90px;
+}
+
+.product-form select{
+    grid-column:span 2;
+}
+
+.product-form input,
+.product-form textarea,
+.product-form select{
+    padding:10px;
+    border:1px solid #e2e8f0;
+    border-radius:6px;
+    font-size:14px;
+    outline:none;
+}
+
+.product-form input:focus,
+.product-form textarea:focus,
+.product-form select:focus{
+    border-color:#6366f1;
+}
+
+/* button */
+
+.product-form button{
+    grid-column:span 2;
+    padding:12px;
+    background:#6366f1;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.product-form button:hover{
+    background:#4f46e5;
+}
+
+
+/* ===============================
+   Product Table
+================================ */
+
+.product-table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.product-table thead{
+    background:#f1f5f9;
+}
+
+.product-table th{
+    text-align:left;
+    padding:14px;
+    font-size:14px;
+    color:#334155;
+}
+
+.product-table td{
+    padding:14px;
+    border-top:1px solid #e2e8f0;
+    font-size:14px;
+}
+
+.product-table tr:hover{
+    background:#f8fafc;
+}
+
+
+/* ===============================
+   Status Colors
+================================ */
+
+.product-active{
+    color:#16a34a;
+    font-weight:600;
+}
+
+.product-inactive{
+    color:#ef4444;
+    font-weight:600;
+}
+
+
+/* ===============================
+   Responsive
+================================ */
+
+@media(max-width:768px){
+
+    .product-form{
+        grid-template-columns:1fr;
+    }
+
+    .product-form textarea,
+    .product-form select,
+    .product-form button{
+        grid-column:span 1;
+    }
+
+}
