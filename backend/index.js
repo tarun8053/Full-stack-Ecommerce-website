@@ -8,7 +8,11 @@ const categoryRoutes = require('./routes/categoryRoutes')
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 app.use(express.json());
-app.use(cors())
+app.use(cors(
+    {
+        origin:['http://localhost:5173', 'https://shop2hub.onrender.com/']
+    }
+))
 mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => console.log("mongodb is connect"))
