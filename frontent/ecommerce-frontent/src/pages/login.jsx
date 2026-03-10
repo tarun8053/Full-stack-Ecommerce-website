@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Login.css";
+import "../styles/login.css";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { NavLink } from "react-router-dom";
