@@ -5,12 +5,13 @@ import Register from './pages/Register'
 import Home from './pages/Home'
 import Products from './pages/Products'
 import Category from './pages/Category'
-import AddToCart from './pages/AddToCart'
 import Order from './pages/Order'
 import AllProduct from './pages/AllProduct'
 import Admin from './pages/AdminDashBoard'
 import AdminCategories from './pages/AdminCategories'
 import AdminProducts from './pages/AdminProducts'
+import Cart from './pages/Cart'
+
 
 export default function App() {
   return (
@@ -21,7 +22,7 @@ export default function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/product' element={<Products/>}/>
         <Route path='/category' element={<Category/>}/>
-        <Route path='/cart' element={<AddToCart/>}/>
+        <Route path='/cart' element={<Cart/>}/>
         <Route path='/order' element={<Order/>}/>
         <Route path='/Allproduct' element={<AllProduct/>}/>
         <Route path='/admin' element={<Admin/>}/>

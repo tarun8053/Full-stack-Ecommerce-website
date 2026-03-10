@@ -20,7 +20,7 @@ export default function AllProduct() {
         })
             .then(res => {
                 setProduct(res.data.products);
-                console.log(res.data.products);
+                
             })
     }
 
