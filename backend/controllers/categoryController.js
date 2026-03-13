@@ -10,7 +10,7 @@ exports.createCategory = async (req, res) => {
                 message: "Title and description are required"
             });
         }
-            console.log( req.user.role)
+            //console.log( req.user.role)
         if (!req.user.isAdmin) {
             return res.status(403).json({
                 message: "Only admin can create categories"
@@ -42,6 +42,7 @@ exports.createCategory = async (req, res) => {
 exports.getCategory = async (req, res) => {
     try {
         const { id } = req.params;
+        
 
         const category = await Category.findById(id);
 
@@ -68,6 +69,7 @@ exports.getAllCategory = async (req, res) => {
     try {
 
         const categories = await Category.find();
+        console.log("categories ==> ", categories);
 
         res.status(200).json({ categories });
 

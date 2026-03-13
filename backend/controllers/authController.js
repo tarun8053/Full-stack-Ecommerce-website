@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const bcrypt = require("bcryptjs");
 
 exports.register = async (req, res, next) => {
     try{
@@ -28,16 +29,22 @@ exports.register = async (req, res, next) => {
     }
 }
 
-exports.login = async (req, res, next) => {
+exports.login = async (req, res) => {
     try{
         const {email, password} = req.body;
 
+       // console.log("email ==> ", email);
+
         const user = await User.findOne({ email });
+
+        // console.log("user found ==> ", user);
         if(!user) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
-        const isMatch = await user.comparePassword(password);
+        // // console.log("password ==> ", password);
+
+        const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
@@ -53,6 +60,6 @@ exports.login = async (req, res, next) => {
 
         res.status(200).json({ message: 'Login successful', token });
     }catch(err){
-        next(err)
+        res.status(500).json({ message: 'Something went wrong', error: err.message });
     }
 }
