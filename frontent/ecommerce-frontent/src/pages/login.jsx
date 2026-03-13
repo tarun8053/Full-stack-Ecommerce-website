@@ -7,6 +7,7 @@ import Header from "../Componet/Header";
 import Footer from "../Componet/Footer";
 
 function Login() {
+   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
