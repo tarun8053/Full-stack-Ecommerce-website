@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/login.css";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Header from "../Componet/Header";
 import Footer from "../Componet/Footer";
 
@@ -29,11 +29,11 @@ function Login() {
         if(decoded.isAdmin){
          
           localStorage.setItem("isAdmin","true");
-          window.location.href = "/admin";
+          navigate("/admin");
           
         }else{
           localStorage.setItem("isAdmin","false")
-          window.location.href = "/";
+          navigate("/");
           
         }
         
