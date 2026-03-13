@@ -31,7 +31,7 @@ app.use('/api/product', productRoutes);
 app.use('/api/order', orderRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-  const clientBuildPath = path.join(__dirname, '..', 'frontend', 'dist');
+const clientBuildPath = path.join(__dirname, '..', 'frontent', 'ecommerce-frontent', 'dist');
   app.use(express.static(clientBuildPath));
 
   app.use((req, res, next) => {
