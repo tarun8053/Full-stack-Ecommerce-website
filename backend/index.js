@@ -7,10 +7,10 @@ const path = require("path");
 const app = express();
 
 app.use(cors({
-origin: ["http://localhost:5173", "https://shop2hub.onrender.com"],
+  origin: ["http://localhost:5173", "https://shop2hub.onrender.com"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-allowedHeaders: ["Content-Type", "Authorization"],
-credentials: true
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
 
 app.use(express.json());
@@ -20,44 +20,25 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("mongodb is connect"))
+  .catch(err => console.log("error :", err));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/order', orderRoutes);
 
-/* -------------------- DATABASE -------------------- */
+if (process.env.NODE_ENV === 'production') {
+  const clientBuildPath = path.join(__dirname, '..', 'frontend', 'dist');
+  app.use(express.static(clientBuildPath));
 
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => console.log("MongoDB connected successfully"))
-.catch(err => console.log("MongoDB connection error:", err));
-
-/* -------------------- FRONTEND SERVE (PRODUCTION) -------------------- */
-
-if (process.env.NODE_ENV === "production") {
-
-const clientBuildPath = path.join(__dirname, "..", "frontend", "dist");
-
-// serve static files
-app.use(express.static(clientBuildPath));
-
-// React Router fallback
-app.get("*", (req, res) => {
-
-
-if (req.path.startsWith("/api")) {
-  return res.status(404).json({ message: "API route not found" });
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(clientBuildPath, 'index.html'));
+  });
 }
-
-res.sendFile(path.join(clientBuildPath, "index.html"));
-
-
-});
-}
-
-/* -------------------- SERVER -------------------- */
 
 const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-console.log(`Server started on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server start on port ${PORT}`));
