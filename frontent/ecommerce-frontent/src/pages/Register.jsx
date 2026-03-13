@@ -2,8 +2,10 @@ import { NavLink } from "react-router-dom";
 import "../styles/login.css";
 import axios from 'axios';
 import Header from "../Componet/Header";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,7 +21,7 @@ export default function Register() {
         .then(response => {
             console.log(response.data)
             alert('Registration Successfully');
-            window.location.href = '/login'
+            navigate('/login')
         })
         .catch(error => {
             console.error("this is error", error)
