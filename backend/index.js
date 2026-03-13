@@ -6,20 +6,19 @@ const path = require("path");
 
 const app = express();
 
+app.use(cors({
+  origin: ["http://localhost:5173", "https://shop2hub.onrender.com"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
+
+app.use(express.json());
+
 const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-
-app.use(express.json());
-
-app.use(cors({
-  origin: ["http://localhost:5173", "https://shop2hub.onrender.com"],
-  methods: ["GET","POST","PUT","DELETE"],
-  credentials: true
-}));
-
-app.options("*", cors());
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -41,4 +40,5 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(3000, () => console.log("Server start on port 3000"));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server start on port ${PORT}`));
