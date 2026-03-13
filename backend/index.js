@@ -2,7 +2,8 @@ require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require("path");
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 
@@ -31,13 +32,25 @@ app.use('/api/product', productRoutes);
 app.use('/api/order', orderRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-const clientBuildPath = path.join(__dirname, '..', 'frontent', 'ecommerce-frontent', 'dist');
-  app.use(express.static(clientBuildPath));
+  const possibleClientDirs = [
+    path.join(__dirname, '..', 'frontent', 'ecommerce-frontent', 'dist'),
+    path.join(__dirname, '..', '..', 'frontent', 'ecommerce-frontent', 'dist'),
+    path.join(__dirname, 'frontent', 'ecommerce-frontent', 'dist'),
+  ];
 
-  app.use((req, res, next) => {
-    if (req.path.startsWith('/api')) return next();
-    res.sendFile(path.join(clientBuildPath, 'index.html'));
-  });
+  const clientBuildPath = possibleClientDirs.find(p => fs.existsSync(p));
+
+  if (!clientBuildPath) {
+    console.warn('Could not find frontend build output (dist/index.html). Searched in:', possibleClientDirs);
+  } else {
+    console.log('Serving built frontend from', clientBuildPath);
+    app.use(express.static(clientBuildPath));
+
+    app.use((req, res, next) => {
+      if (req.path.startsWith('/api')) return next();
+      res.sendFile(path.join(clientBuildPath, 'index.html'));
+    });
+  }
 }
 
 const PORT = process.env.PORT || 3000;
