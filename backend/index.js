@@ -8,7 +8,7 @@ const fs = require('fs');
 const app = express();
 
 app.use(cors({
-  origin: ["http://localhost:5173", "https://shop2hub.onrender.com"],
+  origin: ["http://localhost:5173", "https://shophub-ffwf.onrender.com"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
