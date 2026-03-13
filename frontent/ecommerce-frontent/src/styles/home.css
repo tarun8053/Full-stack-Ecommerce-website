@@ -518,3 +518,30 @@ ul {
 }
 
 }
+/* hide mobile menu items on desktop */
+
+.mobile-auth{
+  display:none;
+}
+
+.mobile-cart{
+  display:none;
+}
+
+
+/* show them only on mobile */
+
+@media (max-width:768px){
+
+.mobile-auth{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:10px;
+}
+
+.mobile-cart{
+  display:block;
+}
+
+}
