@@ -31,6 +31,12 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/order', orderRoutes);
 
+app.use(express.static(path.join(__dirname, "dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server start on port ${PORT}`));
