@@ -6,23 +6,35 @@ import Header from '../Componet/Header';
 import Footer from '../Componet/Footer';
 import {addToCartToLoacalStroage} from '../utils/CartUtils'
 import "../styles/product.css";
-
+import { useLoader } from "../LoaderContext";
 export default function AllProduct() {
 
-
+    const { showLoader, hideLoader } = useLoader();
     const [product, setProduct] = useState([]);
     const [search, setSearch] = useState("");
-    const fetchProducts = () => {
-        axios(`${import.meta.env.VITE_BACKEND_API_URL}/product/list`,{
-        headers:{
-            Authorization:`Bearer ${localStorage.getItem("token")}`
+   
+  const fetchProducts = async () => {
+    try {
+      showLoader();
+
+      const res = await axios(
+        `${import.meta.env.VITE_BACKEND_API_URL}/product/list`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-        })
-            .then(res => {
-                setProduct(res.data.products);
-                
-            })
+      );
+
+      setProduct(res.data.products);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      hideLoader(); // ✅ always run (success + error)
     }
+  };
+
+
 
     useEffect(()=>{
         fetchProducts();

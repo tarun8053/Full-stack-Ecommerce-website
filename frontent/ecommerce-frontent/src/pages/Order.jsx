@@ -3,11 +3,13 @@ import axios from "axios";
 import "../styles/order.css";
 import Header from "../Componet/Header";
 import Footer from "../Componet/Footer";
-
+import { useLoader } from "../LoaderContext";
 export default function Order() {
   const [orders, setOrders] = useState([]);
+   const { showLoader, hideLoader } = useLoader();
 
   const fetchOrders = () => {
+     showLoader();
     axios(`${import.meta.env.VITE_BACKEND_API_URL}/order`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -20,8 +22,10 @@ export default function Order() {
       })
       .catch((error) => {
         console.log("Error in order fetching...!", error);
-      });
-  };
+      })
+     .finally(() => { hideLoader(); });
+     };
+    
 
   useEffect(() => {
     fetchOrders();

@@ -11,10 +11,12 @@ import Admin from './pages/AdminDashBoard'
 import AdminCategories from './pages/AdminCategories'
 import AdminProducts from './pages/AdminProducts'
 import Cart from './pages/Cart'
+import { LoaderProvider } from "./LoaderContext";
 
 
 export default function App() {
   return (
+    <LoaderProvider>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />}/>
@@ -30,5 +32,6 @@ export default function App() {
         <Route path='/adminproduct' element={<AdminProducts/>}/>
       </Routes>
     </BrowserRouter>
+    </LoaderProvider>
   )
 }
