@@ -12,6 +12,9 @@ export default function AllProduct() {
     const { showLoader, hideLoader } = useLoader();
     const [product, setProduct] = useState([]);
     const [search, setSearch] = useState("");
+    const [page, setPage] = useState(1);
+    const perPage = 10;
+    const totalPage = Math.ceil(product.length/perPage)
    
   const fetchProducts = async () => {
     try {
@@ -30,10 +33,9 @@ export default function AllProduct() {
     } catch (error) {
       console.log(error);
     } finally {
-      hideLoader(); // ✅ always run (success + error)
+      hideLoader(); // always run (success + error)
     }
   };
-
 
 
     useEffect(()=>{
@@ -43,6 +45,19 @@ export default function AllProduct() {
    const filterProducts = product.filter((item) =>
   item.title.toLowerCase().includes(search.toLowerCase())
 );
+
+const data = filterProducts.slice((page - 1) * perPage , page * perPage);
+
+    const handlePrev = () => {
+        if(page === 1) return;
+        setPage(page - 1)
+    }
+
+    const handleNext = () => {
+        if(page === totalPage) return;
+        setPage(page + 1)
+    }
+    
 
   return (
     <div>
@@ -57,10 +72,10 @@ export default function AllProduct() {
     placeholder="Search products..."
   />
 </div>
-           <div className="products-container">
+    <div className="products-container">
       
       
-            {filterProducts.map((data) => (
+    {data.map((data) => (
       
               <div key={data._id} className="product-card">
       
@@ -101,10 +116,32 @@ export default function AllProduct() {
       
               </div>
       
-            ))}
+     ))}
           
-      
-          </div>
+           
+  </div>
+
+  <div className="pagination">
+  <button 
+    className="btn prev" 
+    onClick={handlePrev} 
+    disabled={page === 1}
+  >
+    ← Prev
+  </button>
+
+  <span className="page-info">
+    {page} <span>of</span> {totalPage}
+  </span>
+
+  <button 
+    className="btn next" 
+    onClick={handleNext} 
+    disabled={page === totalPage}
+  >
+    Next →
+  </button>
+</div>
           <Footer/>
     </div>
   )

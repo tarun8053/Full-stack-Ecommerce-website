@@ -15,6 +15,9 @@ export default function AdminProducts() {
   const [categoryId, setCategoryId] = useState("");
   const [image, setImage] = useState("");
   const [inStock, setInStock] = useState(true);
+  const [page, setPage] = useState(1);
+  const perPage = 3;
+  const totalPage = Math.ceil(products.length / perPage);
 
   // ===============================
   // Fetch Products
@@ -111,6 +114,18 @@ export default function AdminProducts() {
     fetchProducts();
     fetchCategories();
   }, []);
+
+    const filterd = products.slice((page - 1) * perPage , page * perPage);
+
+    const handlePrev = () => {
+        if(page === 1) return;
+        setPage(page - 1)
+    }
+
+    const handleNext = () => {
+        if(page === totalPage) return;
+        setPage(page + 1)
+    }
 
   return (
     <div>
@@ -210,7 +225,7 @@ export default function AdminProducts() {
 
           <tbody>
 
-            {products.map(prod => {
+            {filterd.map(prod => {
 
               const category = categories.find(
                 cat => cat._id === prod.categoryId
@@ -247,6 +262,28 @@ export default function AdminProducts() {
           </tbody>
 
         </table>
+
+        <div className="pagination">
+          <button 
+            className="btn prev" 
+            onClick={handlePrev} 
+            disabled={page === 1}
+          >
+            ← Prev
+          </button>
+
+          <span className="page-info">
+            {page} <span>of</span> {totalPage}
+          </span>
+
+          <button 
+            className="btn next" 
+            onClick={handleNext} 
+            disabled={page === totalPage}
+          >
+            Next →
+          </button>
+        </div>
 
       </div>
 
